@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbeecia8tlwc2"]
+
+[ext_resource type="Script" path="res://demo_player.gd" id="1_jcnxv"]
+[ext_resource type="Texture2D" uid="uid://1nmv5aw0q4ky" path="res://Arrow.png" id="2_p6t2e"]
+
+[node name="DemoPlayer" type="CharacterBody2D"]
+script = ExtResource("1_jcnxv")
+
+[node name="Arrow" type="Sprite2D" parent="."]
+rotation = 1.5708
+texture = ExtResource("2_p6t2e")

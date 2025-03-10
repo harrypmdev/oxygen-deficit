@@ -1,0 +1,53 @@
+[gd_scene load_steps=6 format=3 uid="uid://deekhfbav8kbh"]
+
+[ext_resource type="Script" path="res://scripts/small_fish.gd" id="1_a58ih"]
+[ext_resource type="Texture2D" uid="uid://dks3o63vnrv8d" path="res://assets/textures/sprites/small_fish.png" id="2_r8ph0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m73be"]
+size = Vector2(16, 13)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gylu6"]
+radius = 6.0
+height = 14.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kj8h6"]
+size = Vector2(16, 13)
+
+[node name="Small Fish" type="CharacterBody2D"]
+z_index = -5
+script = ExtResource("1_a58ih")
+
+[node name="FishSprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_r8ph0")
+
+[node name="WallArea" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 3
+
+[node name="WallCollider" type="CollisionShape2D" parent="WallArea"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_m73be")
+debug_color = Color(0.65097, 0.485019, 0.510156, 0.42)
+
+[node name="PlayerArea" type="Area2D" parent="."]
+z_index = 1
+
+[node name="PlayerCollider" type="CollisionShape2D" parent="PlayerArea"]
+position = Vector2(1, 0)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_gylu6")
+
+[node name="FishArea" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FishArea"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_kj8h6")
+
+[connection signal="area_entered" from="WallArea" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_shape_entered" from="WallArea" to="." method="_on_wall_area_area_shape_entered"]
+[connection signal="body_entered" from="WallArea" to="." method="_on_area_2d_body_entered"]
+[connection signal="area_shape_entered" from="PlayerArea" to="." method="_on_player_area_area_shape_entered"]
+[connection signal="body_entered" from="PlayerArea" to="." method="_on_player_area_body_entered"]
+[connection signal="area_entered" from="FishArea" to="." method="_on_fish_area_area_entered"]

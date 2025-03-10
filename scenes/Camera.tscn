@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://d4aek3cjg40bd"]
+
+[ext_resource type="PackedScene" uid="uid://bihuqit4lavvt" path="res://scenes/Water.tscn" id="1_eaiwf"]
+
+[node name="Camera2D" type="Camera2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" parent="CanvasLayer" instance=ExtResource("1_eaiwf")]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -81.0
+offset_top = -27.0
+offset_right = 50.0
+offset_bottom = 29.0
+grow_horizontal = 2
+grow_vertical = 2

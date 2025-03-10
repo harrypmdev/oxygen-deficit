@@ -1,0 +1,51 @@
+[gd_scene load_steps=10 format=4 uid="uid://dnei5yj8w4v2i"]
+
+[ext_resource type="PackedScene" uid="uid://cbeecia8tlwc2" path="res://scenes/demo_player.tscn" id="1_de6pp"]
+[ext_resource type="Script" path="res://scripts/playground.gd" id="1_kimrk"]
+[ext_resource type="PackedScene" uid="uid://bbxmvfxwqqq2w" path="res://scenes/o_2_plant.tscn" id="2_0qo2d"]
+[ext_resource type="PackedScene" uid="uid://y1al3d6peqrd" path="res://scenes/map.tscn" id="3_2qcso"]
+[ext_resource type="PackedScene" uid="uid://cxo8k0ggsxbmi" path="res://scenes/control.tscn" id="4_ru72t"]
+[ext_resource type="PackedScene" uid="uid://deekhfbav8kbh" path="res://scenes/small_fish.tscn" id="5_nyxg4"]
+[ext_resource type="PackedScene" uid="uid://dwup6v0tk2uah" path="res://scenes/fish.tscn" id="7_qwrfu"]
+[ext_resource type="PackedScene" uid="uid://b8mm8txm3lqg3" path="res://scenes/heart_plant.tscn" id="8_arj2e"]
+[ext_resource type="PackedScene" uid="uid://bbnxabmsk4eat" path="res://scenes/dark.tscn" id="9_licgw"]
+
+[node name="Playground" type="Node2D"]
+script = ExtResource("1_kimrk")
+
+[node name="DemoPlayer" parent="." instance=ExtResource("1_de6pp")]
+position = Vector2(-16, 40)
+
+[node name="O2Plant" parent="." instance=ExtResource("2_0qo2d")]
+position = Vector2(-72, -56)
+
+[node name="Map" parent="." instance=ExtResource("3_2qcso")]
+
+[node name="RockTiles" parent="Map" index="0"]
+tile_map_data = PackedByteArray("AAAEAPz/AQAAAAEAAAAEAP3/AQAAAAEAAAAEAP7/AQAAAAEAAAAEAP//AQAAAAIAAAAFAP7/AQACAAEAAAAFAP3/AQACAAEAAAAFAPz/AQACAAEAAAAFAP//AQACAAIAAAD6//z/AQACAAEAAAD6//3/AQACAAEAAAD6//7/AQACAAEAAAD6////AQACAAEAAAD5////AQAAAAEAAAD6/wAAAQACAAIAAAD5/wAAAQAAAAIAAAD5//7/AQAAAAEAAAD5//3/AQAAAAEAAAD5//z/AQAAAAEAAAD6//v/AQACAAAAAAD5//v/AQAAAAAAAAAEAPv/AQAAAAAAAAAFAPv/AQACAAAAAAA=")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" parent="CanvasLayer" instance=ExtResource("4_ru72t")]
+
+[node name="Small Fish" parent="." instance=ExtResource("5_nyxg4")]
+position = Vector2(-48, -32)
+
+[node name="Small Fish2" parent="." instance=ExtResource("5_nyxg4")]
+position = Vector2(48, -32)
+
+[node name="Fish" parent="." instance=ExtResource("7_qwrfu")]
+position = Vector2(-8, 0)
+
+[node name="HeartPlant" parent="." instance=ExtResource("8_arj2e")]
+position = Vector2(-72, -16)
+
+[node name="HeartPlant2" parent="." instance=ExtResource("8_arj2e")]
+position = Vector2(-72, -40)
+
+[node name="HeartPlant3" parent="." instance=ExtResource("8_arj2e")]
+position = Vector2(104, -64)
+
+[node name="Dark" parent="." instance=ExtResource("9_licgw")]
+
+[editable path="Map"]

@@ -1,0 +1,186 @@
+[gd_scene load_steps=15 format=3 uid="uid://cbeecia8tlwc2"]
+
+[ext_resource type="Script" path="res://scripts/demo_player.gd" id="1_jcnxv"]
+[ext_resource type="PackedScene" uid="uid://d4aek3cjg40bd" path="res://scenes/Camera.tscn" id="3_w1yvt"]
+[ext_resource type="Texture2D" uid="uid://3pwkqyol684b" path="res://assets/textures/sprites/diver_swimming-Sheet.png" id="4_bvfby"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xr7bs"]
+radius = 6.0
+height = 14.0
+
+[sub_resource type="Animation" id="Animation_kayq8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DiverSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+
+[sub_resource type="Animation" id="Animation_rxsvq"]
+resource_name = "damage"
+
+[sub_resource type="Animation" id="Animation_5g2xd"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DiverSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_ukaq5"]
+resource_name = "swimming"
+length = 0.5
+loop_mode = 1
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DiverSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.255751),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [2, 1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wxpv1"]
+_data = {
+"RESET": SubResource("Animation_kayq8"),
+"damage": SubResource("Animation_rxsvq"),
+"idle": SubResource("Animation_5g2xd"),
+"swimming": SubResource("Animation_ukaq5")
+}
+
+[sub_resource type="Animation" id="Animation_eew2h"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_fl0wo"]
+resource_name = "damage"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"safety_ended"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_k1x7t"]
+resource_name = "death"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_a5ap2"]
+resource_name = "o2_death"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.294762, 0.571036, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2dbqk"]
+_data = {
+"RESET": SubResource("Animation_eew2h"),
+"damage": SubResource("Animation_fl0wo"),
+"death": SubResource("Animation_k1x7t"),
+"o2_death": SubResource("Animation_a5ap2")
+}
+
+[node name="DemoPlayer" type="CharacterBody2D"]
+collision_layer = 5
+script = ExtResource("1_jcnxv")
+
+[node name="Camera2D" parent="." instance=ExtResource("3_w1yvt")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = 1
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_xr7bs")
+
+[node name="Timer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 0.95
+autostart = true
+
+[node name="DiverSprite" type="Sprite2D" parent="."]
+texture = ExtResource("4_bvfby")
+hframes = 3
+frame = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_wxpv1")
+}
+
+[node name="DamagePlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2dbqk")
+}
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
+update_rotation = false
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

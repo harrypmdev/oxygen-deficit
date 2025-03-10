@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cs750qg404w64"]
+
+[ext_resource type="Texture2D" uid="uid://dq8rdpi8ceso6" path="res://assets/textures/buttons/menu_button.png" id="1_sa038"]
+[ext_resource type="Texture2D" uid="uid://vwyfhk540fk5" path="res://assets/textures/buttons/menu_button_pressed.png" id="2_0d1d7"]
+
+[node name="MenuButton" type="TextureButton"]
+modulate = Color(1, 1, 1, 0)
+offset_left = 240.0
+offset_top = 168.0
+offset_right = 304.0
+offset_bottom = 208.0
+disabled = true
+texture_normal = ExtResource("1_sa038")
+texture_pressed = ExtResource("2_0d1d7")

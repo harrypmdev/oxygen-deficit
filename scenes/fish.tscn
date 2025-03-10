@@ -1,0 +1,71 @@
+[gd_scene load_steps=8 format=3 uid="uid://dwup6v0tk2uah"]
+
+[ext_resource type="Texture2D" uid="uid://b1yc8b831kx31" path="res://assets/textures/sprites/fish2.png" id="1_ahdkl"]
+[ext_resource type="Script" path="res://scripts/fish.gd" id="1_obb48"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m73be"]
+size = Vector2(26, 20)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hjhci"]
+radius = 9.0
+height = 24.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6beq3"]
+size = Vector2(26, 18)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y1bui"]
+size = Vector2(51, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_56bdv"]
+size = Vector2(25, 37)
+
+[node name="Fish" type="CharacterBody2D"]
+z_index = -5
+script = ExtResource("1_obb48")
+
+[node name="FishSprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_ahdkl")
+hframes = 2
+
+[node name="WallArea" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="WallCollider" type="CollisionShape2D" parent="WallArea"]
+shape = SubResource("RectangleShape2D_m73be")
+debug_color = Color(0.65097, 0.485019, 0.510156, 0.42)
+
+[node name="PlayerArea" type="Area2D" parent="."]
+z_index = 1
+
+[node name="PlayerCollider" type="CollisionShape2D" parent="PlayerArea"]
+position = Vector2(2, 1)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_hjhci")
+debug_color = Color(0.683029, 0.295853, 1, 0.42)
+
+[node name="FishArea" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FishArea"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_6beq3")
+
+[node name="BiteArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BiteArea"]
+position = Vector2(12.5, 0)
+shape = SubResource("RectangleShape2D_y1bui")
+
+[node name="UpDownCollider" type="CollisionShape2D" parent="BiteArea"]
+position = Vector2(25.5, -0.5)
+shape = SubResource("RectangleShape2D_56bdv")
+
+[connection signal="area_entered" from="WallArea" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_shape_entered" from="WallArea" to="." method="_on_wall_area_area_shape_entered"]
+[connection signal="body_entered" from="WallArea" to="." method="_on_area_2d_body_entered"]
+[connection signal="area_shape_entered" from="PlayerArea" to="." method="_on_player_area_area_shape_entered"]
+[connection signal="body_entered" from="PlayerArea" to="." method="_on_player_area_body_entered"]
+[connection signal="area_entered" from="FishArea" to="." method="_on_fish_area_area_entered"]
+[connection signal="body_entered" from="BiteArea" to="." method="_on_bite_area_body_entered"]
+[connection signal="body_exited" from="BiteArea" to="." method="_on_bite_area_body_exited"]

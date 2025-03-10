@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://b8mm8txm3lqg3"]
+
+[ext_resource type="Texture2D" uid="uid://cnr2knnqrge4" path="res://assets/textures/sprites/heartplant.png" id="1_dhxc7"]
+[ext_resource type="Script" path="res://scripts/heart_plant.gd" id="1_x1y1r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jtf0t"]
+size = Vector2(7, 7)
+
+[node name="HeartPlant" type="Node2D"]
+script = ExtResource("1_x1y1r")
+
+[node name="PlantSprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_dhxc7")
+hframes = 2
+vframes = 2
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(3.5, -1.5)
+shape = SubResource("RectangleShape2D_jtf0t")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

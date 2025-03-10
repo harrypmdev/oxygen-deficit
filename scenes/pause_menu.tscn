@@ -1,0 +1,61 @@
+[gd_scene load_steps=9 format=3 uid="uid://cvl1k3nm76evd"]
+
+[ext_resource type="Script" path="res://scripts/pause_menu.gd" id="1_8plbu"]
+[ext_resource type="Texture2D" uid="uid://bo34hi8ft6pwo" path="res://assets/textures/text_sprites/paused.png" id="1_xca2b"]
+[ext_resource type="PackedScene" uid="uid://ty66yg6nsl5g" path="res://scenes/full_screen.tscn" id="3_yyvvu"]
+[ext_resource type="PackedScene" uid="uid://dxwolq2dqyffp" path="res://scenes/audio.tscn" id="4_fcx0o"]
+[ext_resource type="Texture2D" uid="uid://dq8rdpi8ceso6" path="res://assets/textures/buttons/menu_button.png" id="5_x7vi0"]
+[ext_resource type="Texture2D" uid="uid://vwyfhk540fk5" path="res://assets/textures/buttons/menu_button_pressed.png" id="6_ibkr4"]
+[ext_resource type="Texture2D" uid="uid://bp34kp3l345au" path="res://assets/textures/buttons/restart_button.png" id="7_jfanr"]
+[ext_resource type="Texture2D" uid="uid://x6so0gl5kg3w" path="res://assets/textures/buttons/restart_button_pressed.png" id="8_e5cf7"]
+
+[node name="PauseMenu" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8plbu")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 480.0
+offset_bottom = 288.0
+color = Color(0.07, 0.07, 0.07, 0.454902)
+
+[node name="PausedSprite" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.768627)
+position = Vector2(240, 128)
+scale = Vector2(2, 2)
+texture = ExtResource("1_xca2b")
+
+[node name="FullScreen" parent="." instance=ExtResource("3_yyvvu")]
+position = Vector2(264, 80)
+
+[node name="Audio" parent="." instance=ExtResource("4_fcx0o")]
+position = Vector2(216, 80)
+
+[node name="Menu" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 208.0
+offset_top = 168.0
+offset_right = 272.0
+offset_bottom = 208.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("5_x7vi0")
+texture_pressed = ExtResource("6_ibkr4")
+
+[node name="Restart" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 208.0
+offset_top = 200.0
+offset_right = 272.0
+offset_bottom = 240.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("7_jfanr")
+texture_pressed = ExtResource("8_e5cf7")
+
+[connection signal="pressed" from="Menu" to="." method="_on_menu_pressed"]
+[connection signal="pressed" from="Restart" to="." method="_on_restart_pressed"]

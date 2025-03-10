@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://ty66yg6nsl5g"]
+
+[ext_resource type="Script" path="res://scripts/full_screen.gd" id="1_lxli6"]
+[ext_resource type="Texture2D" uid="uid://cmw8cv5krhv6j" path="res://assets/textures/icons/full_screen.png" id="2_g3xp6"]
+
+[node name="FullScreen" type="Node2D"]
+script = ExtResource("1_lxli6")
+
+[node name="TextureButton" type="TextureButton" parent="."]
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("2_g3xp6")
+
+[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]

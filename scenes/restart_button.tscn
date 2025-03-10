@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bbdfbbo0b6h5r"]
+
+[ext_resource type="Texture2D" uid="uid://bp34kp3l345au" path="res://assets/textures/buttons/restart_button.png" id="1_tflgl"]
+[ext_resource type="Texture2D" uid="uid://x6so0gl5kg3w" path="res://assets/textures/buttons/restart_button_pressed.png" id="2_fa2ls"]
+
+[node name="RestartButton" type="TextureButton"]
+modulate = Color(1, 1, 1, 0)
+offset_left = 176.0
+offset_top = 168.0
+offset_right = 240.0
+offset_bottom = 208.0
+disabled = true
+texture_normal = ExtResource("1_tflgl")
+texture_pressed = ExtResource("2_fa2ls")

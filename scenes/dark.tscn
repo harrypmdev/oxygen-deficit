@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://bbnxabmsk4eat"]
+
+[node name="Dark" type="DirectionalLight2D"]
+blend_mode = 1
