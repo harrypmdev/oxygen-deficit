@@ -56,7 +56,7 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wyf5h"]
-radius = 112.0
+radius = 264.121
 
 [node name="O2Plant" type="Node2D"]
 z_index = -1
