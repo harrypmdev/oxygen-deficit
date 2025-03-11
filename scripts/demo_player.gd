@@ -21,11 +21,12 @@ func _ready():
 				print("here")
 				child.energy = 1.4
 				child.texture_scale = 14
-				
+
 
 func _physics_process(delta: float) -> void:
 	var ms := get_global_mouse_position()
-	if (Input.is_mouse_button_pressed(1) and position.distance_to(ms) > 3) and not dead:
+	if (Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and 
+		position.distance_to(ms) > 3) and not dead:
 		$AnimationPlayer.play("swimming")
 		if ms.x < position.x:
 			$DiverSprite.flip_v = true

@@ -7,7 +7,7 @@ func _ready():
 	speed = randi_range(1, 3) * 10
 
 func _physics_process(delta: float) -> void:
-	var collision = move_and_collide(Vector2((speed*delta) * backwards, 0))
+	move_and_collide(Vector2((speed*delta) * backwards, 0))
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is not DemoPlayer:
@@ -19,7 +19,7 @@ func _on_player_area_body_entered(body: Node2D) -> void:
 	if body is DemoPlayer:
 		body.deal_damage(2)
 
-func _on_fish_area_area_entered(area: Area2D) -> void:
+func _on_fish_area_area_entered(_area: Area2D) -> void:
 	$FishSprite.flip_h = not $FishSprite.flip_h
 	$BiteArea.position.x = -25 if $FishSprite.flip_h else 0
 	$BiteArea/UpDownCollider.position.x = -0.5 if $FishSprite.flip_h else 25.5

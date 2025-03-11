@@ -7,11 +7,7 @@ func _ready() -> void:
 		if child is DemoPlayer:
 			player = child
 
-func _process(delta: float) -> void:
-	var print_position = Vector2i(
-		floor(player.global_position.x),
-		floor(player.global_position.y)
-	)
+func _process(_delta: float) -> void:
 	var depth = get_parent().get_parent().player_tilemap_position.y
 	if depth < 0:
 		$Depth.text = str(abs(depth)) + "m Above Start"
@@ -28,10 +24,10 @@ func _process(delta: float) -> void:
 	$Hearts.size.x = player.health * 12.5
 
 func _on_restart_button_pressed() -> void:
-	get_tree().change_scene_to_file("res://Main.tscn")
+	get_tree().change_scene_to_file("res://scenes/Main.tscn")
 
 func _on_menu_button_pressed() -> void:
-	get_tree().change_scene_to_file("res://menu.tscn")
+	get_tree().change_scene_to_file("res://scenes/menu.tscn")
 
 func enable_buttons():
 	$RestartButton.disabled = false

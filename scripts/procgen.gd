@@ -9,18 +9,20 @@ var distance_to_chunk = 120
 var player_tilemap_position
 var last_position
 var changeset: Dictionary
+var last_update
 
-var fish = preload('res://scenes/small_fish.tscn')
-var o2_plant = preload('res://scenes/o_2_plant.tscn')
-var decoration = preload('res://scenes/plant.tscn')
-var big_fish = preload('res://scenes/fish.tscn')
-var heart_plant = preload('res://scenes/heart_plant.tscn')
+var fish_scene = preload('res://scenes/small_fish.tscn')
+var o2_plant_scene = preload('res://scenes/o_2_plant.tscn')
+var decoration_scene = preload('res://scenes/plant.tscn')
+var big_fish_scene = preload('res://scenes/fish.tscn')
+var heart_plant_scene = preload('res://scenes/heart_plant.tscn')
+
 var loaded_plant = []
 var loaded_fish = []
 var loaded_decor = []
 var loaded_big_fish = []
 var loaded_heart_plant = []
-var last_update
+
 var death_loaded = false
 var plant_rarity = 0.979
 var fish_rarity = 0.95
@@ -38,7 +40,7 @@ func _ready() -> void:
 	last_position = $DemoPlayer.global_position
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if $DemoPlayer.dead and not death_loaded:
 		death_loaded = true
 		$AnimationPlayer.play('slow_music')
@@ -55,19 +57,24 @@ func _process(delta: float) -> void:
 
 func generate_chunk(player_pos: Vector2):
 	var chunk_center = $Map/RockTiles.local_to_map(player_pos)
+	@warning_ignore("integer_division")
 	var row_start = chunk_center.y - (chunk_height / 2)
+	@warning_ignore("integer_division")
 	var row_end = chunk_center.y + (chunk_height / 2)
+	@warning_ignore("integer_division")
 	var column_start = chunk_center.x - (chunk_width / 2)
+	@warning_ignore("integer_division")
 	var column_end = chunk_center.x + (chunk_width / 2)
 	set_grid_chunk(column_start, column_end, row_start, row_end)
 
 func update_terrain():
 	var real_width = chunk_width * 16
 	var real_height = chunk_height * 16
-	var top_left = Vector2(
-		$DemoPlayer.global_position.x - real_width / 2,
-		$DemoPlayer.global_position.y - real_height / 2
-	)
+	@warning_ignore("integer_division")
+	var pos_x = $DemoPlayer.global_position.x - real_width / 2
+	@warning_ignore("integer_division")
+	var pos_y = $DemoPlayer.global_position.y - real_height / 2
+	var top_left = Vector2(pos_x, pos_y)
 	BetterTerrain.update_terrain_area($Map/RockTiles,
 	Rect2(top_left, Vector2(real_width, real_height)))	
 
@@ -90,11 +97,12 @@ func spawn_objs(update):
 		generate_heart_plants(update, coord)
 
 func generate_big_fish(update, coord):
+	var starting_spawn_y = 200
 	if (update[coord] == 1 and 
 		coord not in loaded_big_fish
 		and obj_noise.get_noise_2d(coord.x, coord.y) < decor_rarity
 		and obj_noise.get_noise_2d(coord.x, coord.y) > big_fish_rarity
-		and coord.y > 200):
+		and coord.y > starting_spawn_y):
 		var clear = true
 		var surrounding = [
 			# Straight
@@ -167,21 +175,21 @@ func generate_decoration(update, coord):
 			add_decoration(coord)
 
 func add_small_fish(coord):
-	var fish_instance = fish.instantiate()
+	var fish_instance = fish_scene.instantiate()
 	fish_instance.position = $Map/RockTiles.map_to_local(coord)
 	fish_instance.position.y -= 8
 	add_child(fish_instance)
 	loaded_fish.append(coord)
 
 func add_big_fish(coord):
-	var fish_instance = big_fish.instantiate()
+	var fish_instance = big_fish_scene.instantiate()
 	fish_instance.position = $Map/RockTiles.map_to_local(coord)
 	fish_instance.position.y -= 8
 	add_child(fish_instance)
 	loaded_big_fish.append(coord)
 
 func add_plant(coord, rot):
-	var o2_instance = o2_plant.instantiate()
+	var o2_instance = o2_plant_scene.instantiate()
 	o2_instance.position = $Map/RockTiles.map_to_local(coord)
 	o2_instance.position.y -= 8
 	o2_instance.rotation_degrees = rot
@@ -189,7 +197,7 @@ func add_plant(coord, rot):
 	loaded_plant.append(coord)
 
 func add_heart_plant(coord, rot):
-	var heart_plant_instance = heart_plant.instantiate()
+	var heart_plant_instance = heart_plant_scene.instantiate()
 	heart_plant_instance.position = $Map/RockTiles.map_to_local(coord)
 	heart_plant_instance.position.y -= 8
 	heart_plant_instance.rotation_degrees = rot
@@ -199,7 +207,7 @@ func add_heart_plant(coord, rot):
 	loaded_heart_plant.append(coord)
 
 func add_decoration(coord):
-	var decoration_instance = decoration.instantiate()
+	var decoration_instance = decoration_scene.instantiate()
 	decoration_instance.position = $Map/RockTiles.map_to_local(coord)
 	decoration_instance.position.y -= 8
 	add_child(decoration_instance)

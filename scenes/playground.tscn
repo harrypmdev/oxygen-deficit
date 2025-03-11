@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://dnei5yj8w4v2i"]
+[gd_scene load_steps=12 format=4 uid="uid://dnei5yj8w4v2i"]
 
 [ext_resource type="PackedScene" uid="uid://cbeecia8tlwc2" path="res://scenes/demo_player.tscn" id="1_de6pp"]
 [ext_resource type="Script" path="res://scripts/playground.gd" id="1_kimrk"]
@@ -6,9 +6,11 @@
 [ext_resource type="PackedScene" uid="uid://y1al3d6peqrd" path="res://scenes/map.tscn" id="3_2qcso"]
 [ext_resource type="PackedScene" uid="uid://cxo8k0ggsxbmi" path="res://scenes/control.tscn" id="4_ru72t"]
 [ext_resource type="PackedScene" uid="uid://deekhfbav8kbh" path="res://scenes/small_fish.tscn" id="5_nyxg4"]
+[ext_resource type="PackedScene" uid="uid://cvl1k3nm76evd" path="res://scenes/pause_menu.tscn" id="6_mdj8d"]
 [ext_resource type="PackedScene" uid="uid://dwup6v0tk2uah" path="res://scenes/fish.tscn" id="7_qwrfu"]
 [ext_resource type="PackedScene" uid="uid://b8mm8txm3lqg3" path="res://scenes/heart_plant.tscn" id="8_arj2e"]
 [ext_resource type="PackedScene" uid="uid://bbnxabmsk4eat" path="res://scenes/dark.tscn" id="9_licgw"]
+[ext_resource type="PackedScene" uid="uid://bheumckmulm7y" path="res://scenes/plant.tscn" id="10_tji7g"]
 
 [node name="Playground" type="Node2D"]
 script = ExtResource("1_kimrk")
@@ -28,6 +30,8 @@ tile_map_data = PackedByteArray("AAAEAPz/AQAAAAEAAAAEAP3/AQAAAAEAAAAEAP7/AQAAAAE
 
 [node name="Control" parent="CanvasLayer" instance=ExtResource("4_ru72t")]
 
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("6_mdj8d")]
+
 [node name="Small Fish" parent="." instance=ExtResource("5_nyxg4")]
 position = Vector2(-48, -32)
 
@@ -35,10 +39,10 @@ position = Vector2(-48, -32)
 position = Vector2(48, -32)
 
 [node name="Fish" parent="." instance=ExtResource("7_qwrfu")]
-position = Vector2(-8, 0)
+position = Vector2(-16, -8)
 
 [node name="HeartPlant" parent="." instance=ExtResource("8_arj2e")]
-position = Vector2(-72, -16)
+position = Vector2(104, -32)
 
 [node name="HeartPlant2" parent="." instance=ExtResource("8_arj2e")]
 position = Vector2(-72, -40)
@@ -47,5 +51,12 @@ position = Vector2(-72, -40)
 position = Vector2(104, -64)
 
 [node name="Dark" parent="." instance=ExtResource("9_licgw")]
+visible = false
+
+[node name="Plant" parent="." instance=ExtResource("10_tji7g")]
+position = Vector2(72, -88)
+
+[node name="Plant2" parent="." instance=ExtResource("10_tji7g")]
+position = Vector2(-88, -88)
 
 [editable path="Map"]

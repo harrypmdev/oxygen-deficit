@@ -18,6 +18,6 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		$FishSprite.flip_h = not $FishSprite.flip_h
 		backwards = -backwards
 
-func _on_fish_area_area_entered(area: Area2D) -> void:
+func _on_fish_area_area_entered(_area: Area2D) -> void:
 	$FishSprite.flip_h = not $FishSprite.flip_h
 	backwards = -backwards
