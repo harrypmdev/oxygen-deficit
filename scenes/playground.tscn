@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://dnei5yj8w4v2i"]
+[gd_scene load_steps=13 format=4 uid="uid://dnei5yj8w4v2i"]
 
 [ext_resource type="PackedScene" uid="uid://cbeecia8tlwc2" path="res://scenes/demo_player.tscn" id="1_de6pp"]
 [ext_resource type="Script" path="res://scripts/playground.gd" id="1_kimrk"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://b8mm8txm3lqg3" path="res://scenes/heart_plant.tscn" id="8_arj2e"]
 [ext_resource type="PackedScene" uid="uid://bbnxabmsk4eat" path="res://scenes/dark.tscn" id="9_licgw"]
 [ext_resource type="PackedScene" uid="uid://bheumckmulm7y" path="res://scenes/plant.tscn" id="10_tji7g"]
+[ext_resource type="PackedScene" uid="uid://cl0frb73g2ru0" path="res://scenes/statue.tscn" id="12_6wtpd"]
 
 [node name="Playground" type="Node2D"]
 script = ExtResource("1_kimrk")
@@ -58,5 +59,8 @@ position = Vector2(72, -88)
 
 [node name="Plant2" parent="." instance=ExtResource("10_tji7g")]
 position = Vector2(-88, -88)
+
+[node name="Statue" parent="." instance=ExtResource("12_6wtpd")]
+position = Vector2(-96, -112)
 
 [editable path="Map"]

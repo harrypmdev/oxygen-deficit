@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cl0frb73g2ru0"]
+
+[ext_resource type="Texture2D" uid="uid://duu3tah1ko6wd" path="res://assets/textures/sprites/statue.png" id="1_2bkfj"]
+
+[node name="Statue" type="Node2D"]
+z_index = -1
+
+[node name="Statue" type="Sprite2D" parent="."]
+texture = ExtResource("1_2bkfj")
